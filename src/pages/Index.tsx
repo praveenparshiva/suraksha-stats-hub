@@ -1,12 +1,39 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import React, { useState } from 'react';
+import { MobileContainer } from '@/components/ui/mobile-container';
+import { BottomNavigation } from '@/components/navigation/BottomNavigation';
+import { HomeScreen } from '@/screens/HomeScreen';
+import { AddServiceScreen } from '@/screens/AddServiceScreen';
+import { AnalyticsScreen } from '@/screens/AnalyticsScreen';
+import { TabValue } from '@/types/service';
 
 const Index = () => {
+  const [activeTab, setActiveTab] = useState<TabValue>('home');
+
+  const renderScreen = () => {
+    switch (activeTab) {
+      case 'home':
+        return <HomeScreen />;
+      case 'add':
+        return <AddServiceScreen />;
+      case 'analytics':
+        return <AnalyticsScreen />;
+      default:
+        return <HomeScreen />;
+    }
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-background">
+      <MobileContainer>
+        <main className="min-h-screen">
+          {renderScreen()}
+        </main>
+        
+        <BottomNavigation 
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+        />
+      </MobileContainer>
     </div>
   );
 };
