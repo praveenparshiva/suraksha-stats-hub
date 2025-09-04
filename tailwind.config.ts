@@ -82,6 +82,10 @@ export default {
 				'service-sump': 'hsl(var(--service-sump))',
 				'service-tank': 'hsl(var(--service-tank))',
 				'service-both': 'hsl(var(--service-both))',
+				
+				// Header colors
+				'header-text': 'hsl(var(--header-text))',
+				'header-subtitle': 'hsl(var(--header-subtitle))',
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',

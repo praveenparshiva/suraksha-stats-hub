@@ -22,10 +22,10 @@ export function HomeScreen() {
   return (
     <div className="space-y-6 pb-20">
       {/* Header */}
-      <div className="bg-gradient-primary text-white p-6 -mx-4 -mt-4 mb-6">
+      <div className="bg-gradient-primary text-header-text p-6 -mx-4 -mt-4 mb-6">
         <div className="space-y-2">
           <h1 className="text-2xl font-bold">Suraksha Service</h1>
-          <p className="text-blue-100">Tank & Sump Cleaning Services</p>
+          <p className="text-header-subtitle">Tank & Sump Cleaning Services</p>
         </div>
       </div>
 

@@ -92,10 +92,10 @@ export function AnalyticsScreen() {
   return (
     <div className="space-y-6 pb-20">
       {/* Header */}
-      <div className="bg-gradient-primary text-white p-6 -mx-4 -mt-4 mb-6">
+      <div className="bg-gradient-primary text-header-text p-6 -mx-4 -mt-4 mb-6">
         <div className="space-y-2">
           <h1 className="text-xl font-bold">Analytics</h1>
-          <p className="text-blue-100">Business insights and trends</p>
+          <p className="text-header-subtitle">Business insights and trends</p>
         </div>
       </div>
 

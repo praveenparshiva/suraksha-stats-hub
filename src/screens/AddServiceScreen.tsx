@@ -60,10 +60,10 @@ export function AddServiceScreen() {
   return (
     <div className="space-y-6 pb-20">
       {/* Header */}
-      <div className="bg-gradient-primary text-white p-6 -mx-4 -mt-4 mb-6">
+      <div className="bg-gradient-primary text-header-text p-6 -mx-4 -mt-4 mb-6">
         <div className="space-y-2">
           <h1 className="text-xl font-bold">Add New Service</h1>
-          <p className="text-blue-100">Record a new customer service</p>
+          <p className="text-header-subtitle">Record a new customer service</p>
         </div>
       </div>
 
