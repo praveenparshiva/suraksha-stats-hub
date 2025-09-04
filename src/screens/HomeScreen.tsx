@@ -3,6 +3,7 @@ import { Search, Users, IndianRupee, TrendingUp, Calendar } from 'lucide-react';
 import { useService } from '@/contexts/ServiceContext';
 import { CustomerCard } from '@/components/service/CustomerCard';
 import { StatCard } from '@/components/service/StatCard';
+import { EnhancedHeader } from '@/components/ui/enhanced-header';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -21,13 +22,16 @@ export function HomeScreen() {
 
   return (
     <div className="space-y-6 pb-20">
-      {/* Header */}
-      <div className="bg-gradient-primary text-header-text p-6 -mx-4 -mt-4 mb-6">
-        <div className="space-y-2">
-          <h1 className="text-2xl font-bold">Suraksha Service</h1>
-          <p className="text-header-subtitle">Tank & Sump Cleaning Services</p>
-        </div>
-      </div>
+      {/* Enhanced Header */}
+      <EnhancedHeader 
+        title="Suraksha Service"
+        subtitle="Tank & Sump Cleaning Services"
+        showStats={true}
+        stats={[
+          { label: "This Month", value: `₹${stats.totalIncome.toLocaleString('en-IN')}` },
+          { label: "Customers", value: stats.customersServed.toString() }
+        ]}
+      />
 
       {/* Quick Stats */}
       <div className="space-y-4">

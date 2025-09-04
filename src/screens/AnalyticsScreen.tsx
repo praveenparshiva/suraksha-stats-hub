@@ -2,6 +2,7 @@ import React from 'react';
 import { TrendingUp, Calendar, PieChart, BarChart3 } from 'lucide-react';
 import { useService } from '@/contexts/ServiceContext';
 import { StatCard } from '@/components/service/StatCard';
+import { EnhancedHeader } from '@/components/ui/enhanced-header';
 import { Card } from '@/components/ui/card';
 import { 
   ChartContainer, 
@@ -91,13 +92,16 @@ export function AnalyticsScreen() {
 
   return (
     <div className="space-y-6 pb-20">
-      {/* Header */}
-      <div className="bg-gradient-primary text-header-text p-6 -mx-4 -mt-4 mb-6">
-        <div className="space-y-2">
-          <h1 className="text-xl font-bold">Analytics</h1>
-          <p className="text-header-subtitle">Business insights and trends</p>
-        </div>
-      </div>
+      {/* Enhanced Header */}
+      <EnhancedHeader 
+        title="Analytics"
+        subtitle="Business insights and trends"
+        showStats={true}
+        stats={[
+          { label: "Avg Service", value: `₹${avgIncomePerService.toLocaleString('en-IN')}` },
+          { label: "Total Services", value: totalServices.toString() }
+        ]}
+      />
 
       {/* Key Metrics */}
       <div className="grid grid-cols-2 gap-4">

@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Calendar, Phone, MapPin, IndianRupee, FileText, Save } from 'lucide-react';
 import { useService } from '@/contexts/ServiceContext';
 import { ServiceFormData } from '@/types/service';
+import { EnhancedHeader } from '@/components/ui/enhanced-header';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -59,13 +60,11 @@ export function AddServiceScreen() {
 
   return (
     <div className="space-y-6 pb-20">
-      {/* Header */}
-      <div className="bg-gradient-primary text-header-text p-6 -mx-4 -mt-4 mb-6">
-        <div className="space-y-2">
-          <h1 className="text-xl font-bold">Add New Service</h1>
-          <p className="text-header-subtitle">Record a new customer service</p>
-        </div>
-      </div>
+      {/* Enhanced Header */}
+      <EnhancedHeader 
+        title="Add New Service"
+        subtitle="Record a new customer service"
+      />
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         {/* Customer Information */}
