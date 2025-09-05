@@ -43,8 +43,8 @@ export function StatCard({ title, value, subtitle, icon: Icon, trend, className 
             )}
           </div>
         </div>
-        <div className="p-3 bg-primary/10 rounded-lg">
-          <Icon className="h-6 w-6 text-primary" />
+        <div className="p-3 bg-primary/10 rounded-lg -mt-1">
+          <Icon className="h-5 w-5 text-primary" />
         </div>
       </div>
     </Card>
