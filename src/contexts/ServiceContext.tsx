@@ -9,6 +9,7 @@ interface ServiceContextType {
   deleteCustomer: (id: string) => void;
   getCurrentMonthStats: () => MonthlyStats;
   getMonthlyHistory: () => MonthlyStats[];
+  getDailyWeeklyTrend: () => { day: string; income: number; services: number }[];
   searchCustomers: (query: string) => CustomerRecord[];
   loading: boolean;
 }
@@ -192,6 +193,35 @@ export function ServiceProvider({ children }: { children: React.ReactNode }) {
     return Array.from(monthlyData.values()).sort((a, b) => b.month.localeCompare(a.month));
   };
 
+  const getDailyWeeklyTrend = () => {
+    const today = new Date();
+    const weekStart = new Date(today);
+    weekStart.setDate(today.getDate() - today.getDay()); // Start of week (Sunday)
+    
+    const dailyData = [];
+    const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    
+    for (let i = 0; i < 7; i++) {
+      const currentDay = new Date(weekStart);
+      currentDay.setDate(weekStart.getDate() + i);
+      const dayString = currentDay.toISOString().split('T')[0]; // YYYY-MM-DD
+      
+      const dayCustomers = customers.filter(customer => 
+        customer.serviceDate === dayString
+      );
+      
+      const dayIncome = dayCustomers.reduce((sum, customer) => sum + customer.price, 0);
+      
+      dailyData.push({
+        day: dayNames[i],
+        income: dayIncome,
+        services: dayCustomers.length
+      });
+    }
+    
+    return dailyData;
+  };
+
   const searchCustomers = (query: string): CustomerRecord[] => {
     if (!query.trim()) return customers;
     
@@ -212,6 +242,7 @@ export function ServiceProvider({ children }: { children: React.ReactNode }) {
         deleteCustomer,
         getCurrentMonthStats,
         getMonthlyHistory,
+        getDailyWeeklyTrend,
         searchCustomers,
         loading,
       }}

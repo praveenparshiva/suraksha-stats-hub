@@ -1,5 +1,5 @@
 import React from 'react';
-import { TrendingUp, Calendar, PieChart, BarChart3 } from 'lucide-react';
+import { TrendingUp, Calendar, PieChart, BarChart3, Activity } from 'lucide-react';
 import { useService } from '@/contexts/ServiceContext';
 import { StatCard } from '@/components/service/StatCard';
 import { EnhancedHeader } from '@/components/ui/enhanced-header';
@@ -19,7 +19,9 @@ import {
   Bar,
   XAxis,
   YAxis,
-  CartesianGrid
+  CartesianGrid,
+  LineChart,
+  Line
 } from 'recharts';
 
 const CHART_COLORS = {
@@ -30,10 +32,11 @@ const CHART_COLORS = {
 };
 
 export function AnalyticsScreen() {
-  const { getCurrentMonthStats, getMonthlyHistory } = useService();
+  const { getCurrentMonthStats, getMonthlyHistory, getDailyWeeklyTrend } = useService();
   
   const currentStats = getCurrentMonthStats();
   const monthlyHistory = getMonthlyHistory().slice(0, 6); // Last 6 months
+  const dailyWeeklyData = getDailyWeeklyTrend();
   
   // Prepare service breakdown data for pie chart
   const serviceData = [
@@ -174,6 +177,66 @@ export function AnalyticsScreen() {
           </div>
         </Card>
       )}
+
+      {/* Daily Weekly Income Trend - Line Chart */}
+      <Card className="p-4">
+        <div className="space-y-4">
+          <div className="flex items-center gap-2">
+            <Activity className="h-5 w-5 text-primary" />
+            <h3 className="font-semibold text-card-foreground">Daily Income Trend (This Week)</h3>
+          </div>
+          
+          <ChartContainer config={chartConfig}>
+            <LineChart
+              data={dailyWeeklyData}
+              margin={{
+                top: 20,
+                right: 30,
+                left: 20,
+                bottom: 5,
+              }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis 
+                dataKey="day"
+                tick={{ fontSize: 12 }}
+              />
+              <YAxis 
+                tick={{ fontSize: 12 }}
+                tickFormatter={(value) => value === 0 ? '₹0' : `₹${(value / 1000).toFixed(0)}K`}
+              />
+              <ChartTooltip
+                content={<ChartTooltipContent />}
+                formatter={(value: number, name: string) => [
+                  name === 'income' ? `₹${value.toLocaleString('en-IN')}` : value,
+                  name === 'income' ? 'Income' : 'Services'
+                ]}
+              />
+              <Line 
+                type="monotone"
+                dataKey="income" 
+                stroke={CHART_COLORS.primary}
+                strokeWidth={3}
+                dot={{ fill: CHART_COLORS.primary, strokeWidth: 2, r: 4 }}
+                activeDot={{ r: 6, stroke: CHART_COLORS.primary, strokeWidth: 2 }}
+              />
+            </LineChart>
+          </ChartContainer>
+          
+          {/* Daily summary */}
+          <div className="grid grid-cols-4 gap-2 pt-4 border-t border-border">
+            {dailyWeeklyData.slice(0, 4).map((day, index) => (
+              <div key={day.day} className="text-center">
+                <div className="text-sm font-bold text-primary">
+                  {day.income > 0 ? `₹${(day.income / 1000).toFixed(1)}K` : '₹0'}
+                </div>
+                <div className="text-xs text-muted-foreground">{day.day}</div>
+                <div className="text-xs text-muted-foreground">{day.services} srv</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Card>
 
       {/* Monthly Income Trend - Bar Chart */}
       {monthlyIncomeData.length > 0 && (
