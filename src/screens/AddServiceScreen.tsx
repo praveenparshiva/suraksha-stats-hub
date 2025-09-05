@@ -163,12 +163,7 @@ export function AddServiceScreen() {
                 <SelectContent>
                   {serviceTypeOptions.map((option) => (
                     <SelectItem key={option.value} value={option.value}>
-                      <div className="flex justify-between items-center w-full">
-                        <span>{option.label}</span>
-                        <span className="text-xs text-muted-foreground ml-2">
-                          (~₹{option.price})
-                        </span>
-                      </div>
+                      {option.label}
                     </SelectItem>
                   ))}
                 </SelectContent>

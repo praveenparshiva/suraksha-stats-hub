@@ -36,17 +36,6 @@ export function EnhancedHeader({ title, subtitle, showStats = false, stats = [] 
               </div>
             </div>
             
-            {/* Trust indicators */}
-            <div className="flex items-center gap-4 mt-4">
-              <div className="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/20">
-                <CheckCircle className="w-4 h-4 text-green-300" />
-                <span className="text-xs font-medium text-white">Professional Service</span>
-              </div>
-              <div className="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/20">
-                <Droplets className="w-4 h-4 text-blue-300" />
-                <span className="text-xs font-medium text-white">Licensed & Insured</span>
-              </div>
-            </div>
           </div>
         </div>
 
