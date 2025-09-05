@@ -24,7 +24,7 @@ export function StatCard({ title, value, subtitle, icon: Icon, trend, className 
             <div className="text-2xl font-bold text-card-foreground flex items-center gap-1">
               {typeof value === 'string' && value.startsWith('₹') ? (
                 <>
-                  <span className="text-primary text-lg leading-none">₹</span>
+                  <span className="text-primary text-base leading-none">₹</span>
                   <span className="leading-none">{value.slice(1)}</span>
                 </>
               ) : (
